@@ -1,0 +1,50 @@
+{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+
+{% set title    = 'Login'|trans %}
+{% set subtitle = 'Autenticação'|trans %}
+
+{% block content %}
+
+    {% block message %}
+        {% if error %}
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Ocorreu um erro!</strong> {{ error|trans({}, 'FOSUserBundle') }}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block menu %}{% endblock %}
+
+    {% block menu_right %}{% endblock %}
+
+    <form method="post" action="{{ path("fos_user_security_check") }}" role="form" class="form-horizontal">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+        <div id="loginform">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <label class="required" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" maxlength="100" required="required" name="_username" id="username" value="{{ last_username }}" />
+                    <div class="errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <label class="required" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                </div>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" maxlength="100" required="required" name="_password" id="password" value="{{ last_username }}" />
+                    <div class="errors"></div>
+                </div>
+            </div>
+        <div class="form-actions">
+            <div class="col-lg-offset-2 col-lg-10">
+                <div class="btn-group">
+                    <button id="_submit" name="_submit" class="btn btn-primary" type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
