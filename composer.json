@@ -1,0 +1,22 @@
+{
+    "name": "cekurte/userbundle",
+    "description": "This bundle is a custom of FOSUserBundle",
+    "keywords": ["user"],
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "João Paulo Cercal",
+            "email": "sistemas@cekurte.com",
+            "homepage": "http://sistemas.cekurte.com/"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Cekurte\\UserBundle": "" }
+    },
+    "target-dir": "Cekurte/UserBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
