@@ -1,5 +1,10 @@
 {% extends 'CekurteGeneratorBundle::layout.html.twig' %}
 
+{%- block stylesheets -%}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
+{%- endblock -%}
+
 {% set title    = 'Login'|trans %}
 {% set subtitle = 'Autenticação'|trans %}
 
@@ -39,10 +44,11 @@
                     <div class="errors"></div>
                 </div>
             </div>
-        <div class="form-actions">
-            <div class="col-lg-offset-2 col-lg-10">
-                <div class="btn-group">
-                    <button id="_submit" name="_submit" class="btn btn-primary" type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+            <div class="form-actions">
+                <div class="col-lg-offset-2 col-lg-10 login-actions">
+                    <div class="btn-group">
+                        <button id="_submit" name="_submit" class="btn btn-primary" type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                    </div>
                 </div>
             </div>
         </div>
