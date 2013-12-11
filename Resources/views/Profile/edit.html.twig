@@ -1,0 +1,42 @@
+{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
+{%- endblock -%}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set title    = 'Perfil'|trans %}
+{% set subtitle = 'Editar'|trans %}
+
+{%- block search -%}{%- endblock -%}
+
+{% block links -%}
+    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> Voltar</a>
+{% endblock %}
+
+{%- block links_footer -%}{%- endblock -%}
+
+{%- block content -%}
+    <form class="form-horizontal" role="form" action="{{ path('fos_user_profile_edit') }}" method="POST" {{ form_enctype(form) }}>
+
+        {%- for child in form.children -%}
+            {%- if (child.vars.block_prefixes[1] != 'hidden') -%}
+                <div class="form-group">
+                    <div class="col-lg-2">
+                        {{ form_label(child) }}
+                    </div>
+                    <div class="col-lg-10">
+                        {{ form_widget(child) }}
+                        <div class="errors">
+                            {{ form_errors(child) }}
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+        {%- endfor -%}
+
+        {% include 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
+    </form>
+{%- endblock -%}

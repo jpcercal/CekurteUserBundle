@@ -1,0 +1,35 @@
+{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
+{%- endblock -%}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% set title    = 'Perfil'|trans %}
+{% set subtitle = 'Detalhes'|trans %}
+
+{%- block search -%}{%- endblock -%}
+
+{% block links -%}
+    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> Recuperar Senha</a>
+{% endblock %}
+
+{%- block links_footer -%}{%- endblock -%}
+
+{%- block content -%}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr>
+                <th>{{ 'profile.show.username'|trans }}:</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'profile.show.email'|trans }}:</th>
+                <td>{{ user.email }}</td>
+            </tr>
+        </table>
+    </div>
+{%- endblock -%}
