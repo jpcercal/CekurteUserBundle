@@ -20,9 +20,17 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('cekurte_user');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('group')
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('repository')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('default_name')->isRequired()->cannotBeEmpty()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
