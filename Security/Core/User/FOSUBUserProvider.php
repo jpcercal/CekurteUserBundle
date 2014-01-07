@@ -61,7 +61,7 @@ class FOSUBUserProvider extends BaseClass
             $user->{$setter_token}($response->getAccessToken());
 
             $user->setUsername($username);
-            $user->setEmail($username);
+            $user->setEmail($response->getEmail());
             $user->setPassword($username);
             $user->setEnabled(true);
             $user->setRoles(array('ROLE_USER'));
