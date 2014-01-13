@@ -71,7 +71,7 @@ class FOSUBUserProvider extends BaseClass
             //
             // array $response->getResponse()
 
-            $user->setNome($response->getRealName());
+            $user->setName($response->getRealName());
             $user->setPicture($response->getProfilePicture());
 
             $this->userManager->updateUser($user);
