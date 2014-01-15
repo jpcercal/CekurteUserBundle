@@ -97,6 +97,7 @@ parameters:
     facebook_client_secret: 123
     linkedin_client_id: 123
     linkedin_client_secret: 123
+```
 
 Substituo o valor **123** pelos valores correspondentes ao campo solicitado.
 
