@@ -29,12 +29,7 @@ fos_user:
     user_class:             Cekurte\Custom\UserBundle\Entity\User
     group:
         group_class:        Cekurte\Custom\UserBundle\Entity\Group
-    from_email:
-        address:            jpcercal.tmp@gmail.com
-        sender_name:        3M
-    registration:
-        confirmation:
-            enabled:        true
+    # ...
 ```
 
 - **firewall_name**: define qual será o nome a ser tratado nas regras do firewall em `app/config/security.yml`.

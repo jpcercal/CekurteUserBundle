@@ -68,7 +68,7 @@ Ainda no seu arquivo de configuração `app/config/config.yml` adicione a seguin
 # ...
 services:
     oauth_custom_user_provider:
-        class: Cekurte\Custom\UserBundle\Security\Core\User\FOSUBUserProvider
+        class: Cekurte\UserBundle\Security\Core\User\FOSUBUserProvider
         arguments: [@fos_user.user_manager,{facebook: facebook_id, linkedin: linkedin_id}]
 ```
 
