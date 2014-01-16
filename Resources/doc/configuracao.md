@@ -141,7 +141,7 @@ cekurte_custom_user_admin_fos_user:
 Agora nós iremos criar o bundle CekurteCustomUserBundle, para isso execute o seguinte comando:
 
 ```bash
-$ php app/console generate:bundle --namespace=Cekurte/Custom/UserBundle --format=annotation --structure=no --no-interaction
+$ php app/console generate:bundle --namespace=Cekurte/Custom/UserBundle --dir=src --format=annotation --no-interaction
 ```
 
 ## Entity

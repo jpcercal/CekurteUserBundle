@@ -8,6 +8,7 @@ Serão abordados os seguintes procedimentos:
 
 - [Instalação](instalacao.md)
 - [Configuração](configuracao.md)
+- [Configuração do HWIOAuthBundle (opcional)](configuracao-oauth.md)
 
 
 [Voltar para o README](https://github.com/CekurteSistemas/CekurteUserBundle/blob/master/README.md)
