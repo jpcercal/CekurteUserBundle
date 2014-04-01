@@ -2,13 +2,19 @@
 
 namespace Cekurte\UserBundle\Security\Core\User;
 
-use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * Realiza a integração do bundle "FOSUserBundle" com o "HWIOAuthBundle",
+ * permitindo que seja realizada a autenticação via protocólo OAuth.
+ *
+ * @author João Paulo Cercal <sistemas@cekurte.com>
+ * @version 1.0
+ */
 class FOSUBUserProvider extends BaseClass
 {
-
     /**
      * {@inheritDoc}
      */
@@ -36,6 +42,21 @@ class FOSUBUserProvider extends BaseClass
         $user->{$setter_token}($response->getAccessToken());
 
         $this->userManager->updateUser($user);
+    }
+
+    /**
+     * Filter of FOSUBUserProvider::loadUserByOAuthUserResponse method
+     *
+     * @param  User $user
+     * @param  UserResponseInterface $response
+     * @return User
+     */
+    protected function filterLoadUserByOAuthUserResponse($user, UserResponseInterface $response)
+    {
+        $user->setName($response->getRealName());
+        $user->setPicture($response->getProfilePicture());
+
+        return $user;
     }
 
     /**
@@ -71,8 +92,7 @@ class FOSUBUserProvider extends BaseClass
             //
             // array $response->getResponse()
 
-            $user->setName($response->getRealName());
-            $user->setPicture($response->getProfilePicture());
+            $user = $this->filterLoadUserByOAuthUserResponse($user, $response);
 
             $this->userManager->updateUser($user);
 
@@ -89,5 +109,4 @@ class FOSUBUserProvider extends BaseClass
 
         return $user;
     }
-
 }
