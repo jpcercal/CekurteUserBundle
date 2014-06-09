@@ -7,13 +7,13 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% set title    = 'Perfil'|trans %}
-{% set subtitle = 'Editar'|trans %}
+{% set title    = 'Profile'|trans %}
+{% set subtitle = 'Edit'|trans %}
 
 {%- block search -%}{%- endblock -%}
 
 {% block links -%}
-    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> Voltar</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
 {% endblock %}
 
 {%- block links_footer -%}{%- endblock -%}

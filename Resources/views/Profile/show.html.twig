@@ -7,14 +7,14 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% set title    = 'Perfil'|trans %}
-{% set subtitle = 'Detalhes'|trans %}
+{% set title    = 'Profile'|trans %}
+{% set subtitle = 'Details'|trans %}
 
 {%- block search -%}{%- endblock -%}
 
 {% block links -%}
-    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
-    <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> Recuperar Senha</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-pencil"></span> {{ 'Edit' }}</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'Password Recovery'|trans }}</a>
 {% endblock %}
 
 {%- block links_footer -%}{%- endblock -%}

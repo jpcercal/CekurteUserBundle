@@ -7,13 +7,13 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% set title    = 'Perfil'|trans %}
-{% set subtitle = 'Recuperar Senha'|trans %}
+{% set title    = 'Profile'|trans %}
+{% set subtitle = 'Password Recovery'|trans %}
 
 {%- block search -%}{%- endblock -%}
 
 {% block links -%}
-    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> Voltar</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
 {% endblock %}
 
 {%- block links_footer -%}{%- endblock -%}
@@ -42,7 +42,7 @@
         {% embed 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
             {% block action_reset %}{% endblock %}
             {% block action_submit_icon %}<span class="glyphicon glyphicon-envelope"></span>{% endblock %}
-            {% block action_submit_label %}{{ 'Recuperar Senha'|trans }}{% endblock %}
+            {% block action_submit_label %}{{ 'Reset Password'|trans }}{% endblock %}
         {% endembed %}
     </form>
 {%- endblock -%}

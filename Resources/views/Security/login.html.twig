@@ -6,7 +6,7 @@
 {%- endblock -%}
 
 {% set title    = 'Login'|trans %}
-{% set subtitle = 'Autenticação'|trans %}
+{% set subtitle = 'Authentication'|trans %}
 
 {% block content %}
 
@@ -14,7 +14,7 @@
         {% if error %}
             <div class="alert alert-danger fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Ocorreu um erro!</strong> {{ error|trans({}, 'FOSUserBundle') }}
+                <strong>{{ 'Error'|trans }}!</strong> {{ error|trans({}, 'FOSUserBundle') }}
             </div>
         {% endif %}
     {% endblock %}
