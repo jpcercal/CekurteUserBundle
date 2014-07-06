@@ -3,14 +3,14 @@
 namespace Cekurte\UserBundle\Command\GroupRole;
 
 use Cekurte\UserBundle\Command\GroupRoleCommand;
-use Cekurte\UserBundle\Entity\Group;
+use FOS\UserBundle\Model\Group;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Atribuí uma Role a um grupo de usuários
- * 
+ *
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
@@ -18,7 +18,7 @@ class CreateGroupRoleCommand extends GroupRoleCommand
 {
     /**
      * Recupera uma mensagem de ajuda
-     * 
+     *
      * @return string
      */
     private function getHelpMessage()
@@ -29,7 +29,7 @@ O comando <info>cekurte:role:create</info> cria um novo papel e o atribuí para 
 <info>php app/console cekurte:role:create NomedoGrupo Papel</info>
 EOT;
     }
-    
+
     /**
      * @see Command
      */
@@ -52,19 +52,19 @@ EOT;
     {
         $group  = $input->getArgument('group');
         $role   = $this->getFormattedRole($input->getArgument('role'));
-        
+
         $groupEntity = $this->getGroupManager()->findGroupByName($group);
-        
+
         if (!$groupEntity instanceof Group) {
             throw new \Exception(sprintf('O grupo "%s" não foi encontrado na base de dados.', $group));
         }
-        
+
         if ($groupEntity->hasRole($role)) {
             throw new \Exception(sprintf('O grupo "%s" já possuí o papel "%s".', $group, $role));
         }
-        
+
         $groupEntity->addRole($role);
-        
+
         $this->getGroupManager()->updateGroup($groupEntity);
 
         $output->writeln(sprintf('Papel "%s" criado e atribuído para o Grupo "%s" com sucesso.', $role, $group));

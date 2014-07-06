@@ -3,14 +3,14 @@
 namespace Cekurte\UserBundle\Command\Group;
 
 use Cekurte\UserBundle\Command\GroupCommand;
-use Cekurte\UserBundle\Entity\Group;
+use FOS\UserBundle\Model\Group;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Atualiza o nome de um grupo na base de dados.
- * 
+ *
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
@@ -18,7 +18,7 @@ class UpdateGroupCommand extends GroupCommand
 {
     /**
      * Recupera uma mensagem de ajuda
-     * 
+     *
      * @return string
      */
     private function getHelpMessage()
@@ -29,7 +29,7 @@ O comando <info>cekurte:group:update</info> atualiza o nome de um grupo na base 
 <info>php app/console cekurte:group:update NomeAntigo NovoNome</info>
 EOT;
     }
-    
+
     /**
      * @see Command
      */
@@ -44,7 +44,7 @@ EOT;
             ))
             ->setHelp($this->getHelpMessage());
     }
-    
+
     /**
      * @see Command
      */
@@ -64,7 +64,7 @@ EOT;
             );
             $input->setArgument('old_name', $username);
         }
-        
+
         if (!$input->getArgument('new_name')) {
             $username = $this->getHelper('dialog')->askAndValidate(
                 $output,
@@ -88,15 +88,15 @@ EOT;
     {
         $oldName = $input->getArgument('old_name');
         $newName = $input->getArgument('new_name');
-        
+
         $groupEntity = $this->getGroupManager()->findGroupByName($oldName);
-        
+
         if (!$groupEntity instanceof Group) {
             throw new \Exception('O grupo que você está tentando atualizar não foi encontrado na base de dados!');
-        } 
-        
+        }
+
         $groupEntity->setName($newName);
-        
+
         $this->getGroupManager()->updateGroup($groupEntity);
 
         $output->writeln(sprintf('Grupo "%s" alterado para "%s" com sucesso.', $oldName, $oldName));
