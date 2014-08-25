@@ -1,5 +1,23 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Group:new_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set title    = 'Group'|trans %}
+{% set subtitle = 'List'|trans %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'CekurteUserBundle:Form:fields.html.twig' %}
+
+{% block links -%}
+
+{% endblock %}
+
+{%- block content -%}
+    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ACL') %}
+        <form action="{{ path('fos_user_group_new') }}" {{ form_enctype(form) }} method="POST" class="fos_user_group_new">
+            {{ form_widget(form) }}
+            {% embed 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
+                {% block action_submit_label %}{{ 'group.new.submit'|trans({}, 'FOSUserBundle') }}{% endblock %}
+            {% endembed %}
+        </form>
+    {% endif %}
+{%- endblock -%}

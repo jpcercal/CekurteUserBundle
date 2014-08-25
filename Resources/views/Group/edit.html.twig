@@ -1,5 +1,21 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Group:edit_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set title    = 'Group'|trans %}
+{% set subtitle = 'Edit'|trans %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% form_theme form 'CekurteUserBundle:Form:fields.html.twig' %}
+
+{% block links -%}
+    <a title="" class="btn btn-default" href="{{ path('fos_user_group_list') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
+{% endblock %}
+
+{%- block content -%}
+    <form class="form-horizontal" role="form" action="{{ path('fos_user_group_edit', {'groupName': group_name} ) }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+        {% embed 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
+            {% block action_submit_label %}{{ 'group.edit.submit'|trans({}, 'FOSUserBundle') }}{% endblock %}
+        {% endembed %}
+    </form>
+{%- endblock -%}

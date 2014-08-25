@@ -1,5 +1,60 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Group:list_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set title    = 'Group'|trans %}
+{% set subtitle = 'List'|trans %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block links -%}
+    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ACL') %}
+        {% embed 'CekurteGeneratorBundle:Action:create.html.twig' with {
+            'route': 'fos_user_group_new',
+        } only %}
+        {% endembed %}
+    {% endif %}
+{% endblock %}
+
+{%- block content -%}
+    {% if is_granted('ROLE_SUPER_ADMIN') or is_granted('ROLE_ACL') %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>{{ 'Group'|trans }}</th>
+                        <th class="action">{{ 'Actions'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for group in groups %}
+                        <tr>
+                            <td><a href="{{ path('fos_user_group_show', {'groupName': group.name} ) }}">{{ group.name }}</a></td>
+                            <td>
+                                {% embed 'CekurteGeneratorBundle:Action:retrieve.html.twig' with {
+                                    'route'             : 'fos_user_group_show',
+                                    'identifierKey'     : 'groupName',
+                                    'identifierValue'   : group.name
+                                } only %}
+                                {% endembed  %}
+                                {% embed 'CekurteGeneratorBundle:Action:update.html.twig' with {
+                                    'route'             : 'fos_user_group_edit',
+                                    'identifierKey'     : 'groupName',
+                                    'identifierValue'   : group.name
+                                } only %}
+                                {% endembed  %}
+                                {% embed 'CekurteGeneratorBundle:Action:delete.html.twig' with {
+                                    'route'             : 'fos_user_group_delete',
+                                    'identifierKey'     : 'groupName',
+                                    'identifierValue'   : group.name
+                                } only %}
+                                    {% block form_open %}<form class="form-delete-inline{% if (show_label is defined) and (show_label == true) %} {{ 'form-delete' | trans }}{% endif %}" action="{{ path(route, {(identifierKey) : identifierValue}) }}" method="get">{% endblock %}
+                                    {% block method %}{% endblock %}
+                                    {% block token %}{% endblock %}
+                                {% endembed  %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+{%- endblock -%}

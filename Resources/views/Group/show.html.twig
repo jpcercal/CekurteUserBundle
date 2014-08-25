@@ -1,5 +1,21 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Group:show_content.html.twig" %}
-{% endblock fos_user_content %}
+{% set title    = 'Group'|trans %}
+{% set subtitle = 'Details'|trans %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block links -%}
+    <a title="" class="btn btn-default" href="{{ path('fos_user_group_list') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
+{% endblock %}
+
+{%- block content -%}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr>
+                <th>{{ 'group.show.name'|trans }}:</th>
+                <td>{{ group.name }}</td>
+            </tr>
+        </table>
+    </div>
+{%- endblock -%}

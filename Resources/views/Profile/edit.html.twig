@@ -5,8 +5,6 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% form_theme form 'CekurteUserBundle:Form:fields.html.twig' %}
-
 {% block links -%}
     <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
 {% endblock %}
