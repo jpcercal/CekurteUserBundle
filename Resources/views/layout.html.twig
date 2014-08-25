@@ -1,0 +1,15 @@
+{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
+{%- endblock -%}
+
+{%- block links_footer -%}{%- endblock -%}
+
+{%- block search -%}{%- endblock -%}
+
+{% block menu_right %}
+    {% set menu_active = 'user' %}
+    {{ parent() }}
+{% endblock %}

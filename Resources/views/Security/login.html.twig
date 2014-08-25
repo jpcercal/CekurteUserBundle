@@ -1,64 +1,69 @@
-{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+{%- extends 'CekurteUserBundle::layout.html.twig' -%}
 
-{%- block stylesheets -%}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
-{%- endblock -%}
+{%- set title    = 'Login'|trans -%}
+{%- set subtitle = 'Authentication'|trans -%}
 
-{% set title    = 'Login'|trans %}
-{% set subtitle = 'Authentication'|trans %}
+{% trans_default_domain 'FOSUserBundle' %}
 
-{% block content %}
+{%- block menu -%}{%- endblock -%}
 
-    {% block message %}
-        {% if error %}
+{%- block menu_right -%}{%- endblock -%}
+
+{%- block content -%}
+
+    {%- block message -%}
+        {%- if error -%}
             <div class="alert alert-danger fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <strong>{{ 'Error'|trans }}!</strong> {{ error|trans({}, 'FOSUserBundle') }}
             </div>
-        {% endif %}
-    {% endblock %}
-
-    {% block menu %}{% endblock %}
-
-    {% block menu_right %}{% endblock %}
+        {%- endif -%}
+    {%- endblock -%}
 
     {%- block form_open -%}<form method="post" action="{{ path("fos_user_security_check") }}" role="form" class="form-horizontal">{%- endblock -%}
         {%- block form_csrf -%}<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />{%- endblock -%}
         {%- block form_container_open -%}<div id="loginform">{%- endblock -%}
             {%- block username -%}
-            <div class="form-group">
-                <div class="col-lg-2">
-                    <label class="required" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-                </div>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" maxlength="100" required="required" name="_username" id="username" value="{{ last_username }}" />
-                    <div class="errors"></div>
-                </div>
-            </div>
-            {%- endblock -%}
-            {%- block password -%}
-            <div class="form-group">
-                <div class="col-lg-2">
-                    <label class="required" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
-                </div>
-                <div class="col-lg-10">
-                    <input type="password" class="form-control" maxlength="100" required="required" name="_password" id="password" value="{{ last_username }}" />
-                    <div class="errors"></div>
-                </div>
-            </div>
-            {%- endblock -%}
-            {%- block actions -%}
-            <div class="form-actions">
-                <div class="col-lg-offset-2 col-lg-10 login-actions">
-                    <div class="btn-group">
-                        {%- block submit -%}
-                        <button id="_submit" name="_submit" class="btn btn-primary" type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
-                        {%- endblock -%}
+                <div class="form-group">
+                    <div class="col-lg-2">
+                        <label class="required" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" maxlength="100" required="required" name="_username" id="username" value="{{ last_username }}" />
+                        <div class="errors"></div>
                     </div>
                 </div>
-            </div>
+            {%- endblock -%}
+            {%- block password -%}
+                <div class="form-group">
+                    <div class="col-lg-2">
+                        <label class="required" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                    </div>
+                    <div class="col-lg-10">
+                        <input type="password" class="form-control" maxlength="100" required="required" name="_password" id="password" value="{{ last_username }}" />
+                        <div class="errors"></div>
+                    </div>
+                </div>
+            {%- endblock -%}
+            {%- block remember_me -%}
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+                    </div>
+                </div>
+            {%- endblock -%}
+            {%- block actions -%}
+                <div class="form-actions">
+                    <div class="col-lg-offset-2 col-lg-10 login-actions">
+                        <div class="btn-group">
+                            {%- block submit -%}
+                            <button id="_submit" name="_submit" class="btn btn-primary" type="submit">{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}</button>
+                            {%- endblock -%}
+                        </div>
+                    </div>
+                </div>
             {%- endblock -%}
         {%- block form_container_close -%}</div>{%- endblock -%}
     {%- block form_close -%}</form>{%- endblock -%}
-{% endblock content %}
+{%- endblock content -%}

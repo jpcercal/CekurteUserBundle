@@ -1,23 +1,13 @@
-{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
-
-{%- block stylesheets -%}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
-{%- endblock -%}
-
-{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
 {% set title    = 'Profile'|trans %}
 {% set subtitle = 'Details'|trans %}
 
-{%- block search -%}{%- endblock -%}
-
 {% block links -%}
     <a title="" class="btn btn-default" href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-pencil"></span> {{ 'Edit' }}</a>
     <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'Password Recovery'|trans }}</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'Password Recovery'|trans }}</a>
 {% endblock %}
-
-{%- block links_footer -%}{%- endblock -%}
 
 {%- block content -%}
     <div class="table-responsive">

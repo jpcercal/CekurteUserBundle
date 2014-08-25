@@ -1,0 +1,19 @@
+{% extends 'CekurteUserBundle::layout.html.twig' %}
+
+{% set title    = 'Registration'|trans %}
+{% set subtitle = 'new'|trans %}
+
+{%- form_theme form 'CekurteUserBundle:Form:fields.html.twig' -%}
+
+{%- block menu -%}{%- endblock -%}
+
+{%- block menu_right -%}{%- endblock -%}
+
+{%- block content -%}
+    <form class="form-horizontal" role="form" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+        {% embed 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
+            {% block action_submit_label %}{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}{% endblock %}
+        {% endembed %}
+    </form>
+{%- endblock -%}

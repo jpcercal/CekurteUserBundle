@@ -1,25 +1,15 @@
-{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
-
-{%- block stylesheets -%}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/cekurteuser/css/style.css') }}" />
-{%- endblock -%}
-
-{% trans_default_domain 'FOSUserBundle' %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
 {% set title    = 'Profile'|trans %}
 {% set subtitle = 'Password Recovery'|trans %}
 
-{%- block search -%}{%- endblock -%}
+{%- form_theme form 'CekurteUserBundle:Form:fields.html.twig' -%}
 
 {% block links -%}
     <a title="" class="btn btn-default" href="{{ path('fos_user_profile_show') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
 {% endblock %}
 
-{%- block links_footer -%}{%- endblock -%}
-
 {%- block content -%}
-
     {%- if invalid_username is defined -%}
         <section class="messages">
             <div class="alert alert-danger fade in">
