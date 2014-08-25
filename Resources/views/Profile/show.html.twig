@@ -3,10 +3,12 @@
 {% set title    = 'Profile'|trans %}
 {% set subtitle = 'Details'|trans %}
 
+{% trans_default_domain 'FOSUserBundle' %}
+
 {% block links -%}
     <a title="" class="btn btn-default" href="{{ path('fos_user_profile_edit') }}"><span class="glyphicon glyphicon-pencil"></span> {{ 'Edit' }}</a>
     <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'Password Recovery'|trans }}</a>
-    <a title="" class="btn btn-default" href="{{ path('fos_user_resetting_request') }}"><span class="glyphicon glyphicon-wrench"></span> {{ 'Password Recovery'|trans }}</a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_change_password') }}"><span class="glyphicon glyphicon-lock"></span> {{ 'Change Password'|trans }}</a>
 {% endblock %}
 
 {%- block content -%}
