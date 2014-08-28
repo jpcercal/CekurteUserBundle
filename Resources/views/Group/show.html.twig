@@ -16,6 +16,61 @@
                 <th>{{ 'group.show.name'|trans }}:</th>
                 <td>{{ group.name }}</td>
             </tr>
+            <tr>
+                <th>{{ 'Roles'|trans }}</th>
+                <td>
+                    {% if group.roles|length > 0 %}
+                        {% for item in group.roles %}
+                            {{ item }}{% if not loop.last %}<br />{% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </td>
+            </tr>
         </table>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ 'Users'|trans }}</div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                {% if users|length > 0 %}
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>{{ 'Username'|trans }}</th>
+                            <th>{{ 'E-mail'|trans }}</th>
+                            <th>{{ 'Last Login'|trans }}</th>
+                            <th>{{ 'Enabled'|trans }}</th>
+                            <th>{{ 'Actions'|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in users %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('cekurte_user_show', {'username': item.username}) }}">
+                                        {{ item.username }}
+                                    </a>
+                                </td>
+                                <td>{{ item.email }}</td>
+                                <td>{{ item.lastLogin|localizeddate('medium', 'medium') }}</td>
+                                <td>
+                                    {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
+                                        'fieldValue': item.enabled
+                                    } %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('cekurte_user_show', {'username': item.username}) }}" class="btn btn-sm btn-default">
+                                        <span class="glyphicon glyphicon-new-window"></span> {{ 'Details' | trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    {{ block('not_records_found') }}
+                {% endif %}
+            </div>
+        </div>
     </div>
 {%- endblock -%}
