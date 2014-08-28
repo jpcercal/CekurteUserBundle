@@ -1,0 +1,90 @@
+{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+
+{% set title    = 'User'|trans %}
+{% set subtitle = 'Details'|trans %}
+
+{% block search -%}{% endblock %}
+
+{% block links -%}{% endblock %}
+
+{% block links_footer -%}{% endblock %}
+
+{% block content -%}
+    <div class="table-responsive">
+        <table class="table table-bordered table-show">
+            <tbody>
+                <tr>
+                    <th>{{ 'Username'|trans }}</th>
+                    <td>{{ entity.username }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'E-mail'|trans }}</th>
+                    <td>{{ entity.email }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Last Login'|trans }}</th>
+                    <td>{{ entity.lastLogin|localizeddate('medium', 'medium') }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'Groups'|trans }}</th>
+                    <td>
+                        {% if entity.groups|length > 0 %}
+                            {% for group in entity.groups %}
+                                <a href="{{ path('fos_user_group_show', {'groupName': group.name}) }}" class="btn btn-xs btn-default">
+                                    <span class="glyphicon glyphicon-new-window"></span> {{ group.name }}
+                                </a>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'Roles'|trans }}</th>
+                    <td>
+                        {% if entity.roles|length > 0 %}
+                            {% for item in entity.roles %}
+                                {{ item }}{% if not loop.last %}<br />{% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'Group Roles'|trans }}</th>
+                    <td>
+                        {% if entity.groups|length > 0 %}
+                            {% for group in entity.groups %}
+                                <strong>{{ group.name }}</strong><br />
+                                {% for item in group.roles %}
+                                    {{ item }}{% if not loop.last %}<br />{% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'Enabled'|trans }}</th>
+                    <td>
+                        {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
+                            'fieldValue': entity.enabled
+                        } %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'Locked'|trans }}</th>
+                    <td>
+                        {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
+                            'fieldValue': entity.locked
+                        } %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'Expired'|trans }}</th>
+                    <td>
+                        {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
+                            'fieldValue': entity.expired
+                        } %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

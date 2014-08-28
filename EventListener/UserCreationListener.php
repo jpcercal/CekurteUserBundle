@@ -35,11 +35,11 @@ class UserCreationListener implements EventSubscriberInterface
      */
     public function __construct(EntityManager $entityManager, ContainerInterface $container)
     {
-        $cekurte_user = $container->getParameter('cekurte_user');
-
-        $this->groupRepositoryName  = $cekurte_user['group']['repository'];
-        $this->entityManager        = $entityManager;
-        $this->defaultGroupName     = $cekurte_user['group']['default_name'];
+//        $cekurte_user = $container->getParameter('cekurte_user');
+//
+//        $this->groupRepositoryName  = $cekurte_user['group']['repository'];
+//        $this->entityManager        = $entityManager;
+//        $this->defaultGroupName     = $cekurte_user['group']['default_name'];
     }
 
     /**
@@ -57,19 +57,19 @@ class UserCreationListener implements EventSubscriberInterface
      */
     public function onRegistrationSuccess(FormEvent $event)
     {
-        $user   = $event->getForm()->getData();
-
-        $group  = $this->getEntityManager()
-            ->getRepository($this->getGroupRepositoryName())
-            ->findOneByName($this->getDefaultGroupName())
-        ;
-
-        if (!$group instanceof GroupInterface) {
-            throw new \Exception(sprintf('O Grupo "%s" não foi encontrado na base de dados!', $this->getDefaultGroupName()));
-        }
-
-        $user->addGroup($group);
-        $this->getEntityManager()->flush();
+//        $user   = $event->getForm()->getData();
+//
+//        $group  = $this->getEntityManager()
+//            ->getRepository($this->getGroupRepositoryName())
+//            ->findOneByName($this->getDefaultGroupName())
+//        ;
+//
+//        if (!$group instanceof GroupInterface) {
+//            throw new \Exception(sprintf('O Grupo "%s" não foi encontrado na base de dados!', $this->getDefaultGroupName()));
+//        }
+//
+//        $user->addGroup($group);
+//        $this->getEntityManager()->flush();
     }
 
     /**
