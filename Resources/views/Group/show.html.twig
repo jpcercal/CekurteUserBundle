@@ -6,7 +6,15 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block links -%}
-    <a title="" class="btn btn-default" href="{{ path('fos_user_group_list') }}"><span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}</a>
+    <a title="" class="btn btn-danger" href="{{ path('fos_user_group_edit_roles', {'groupName': group.name}) }}">
+        <span class="glyphicon glyphicon-globe"></span> {{ 'Edit Roles'|trans }}
+    </a>
+    <a title="" class="btn btn-primary" href="{{ path('fos_user_group_edit_users', {'groupName': group.name}) }}">
+        <span class="glyphicon glyphicon-user"></span> {{ 'Edit Users'|trans }}
+    </a>
+    <a title="" class="btn btn-default" href="{{ path('fos_user_group_list') }}">
+        <span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}
+    </a>
 {% endblock %}
 
 {%- block content -%}

@@ -1,0 +1,29 @@
+<?php
+
+namespace Cekurte\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Role
+ *
+ * @ORM\Table(name="auth_role")
+ * @ORM\Entity
+ */
+class Role
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="id", type="string", length=255, unique=true)
+     * @ORM\Id
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
+}

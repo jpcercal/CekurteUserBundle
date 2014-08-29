@@ -1,0 +1,72 @@
+{% extends 'CekurteGeneratorBundle::layout.html.twig' %}
+
+{% set title    = 'Role'|trans %}
+{% set subtitle = 'List'|trans %}
+
+{% block search -%}
+    {% include 'CekurteUserBundle:Role:search.html.twig' %}
+{% endblock %}
+
+{% block links -%}
+    {% embed 'CekurteGeneratorBundle:Action:search.html.twig' only %}
+    {% endembed %}
+    {% embed 'CekurteGeneratorBundle:Action:create.html.twig' with {
+        'route': 'admin_role_new'
+    } only %}
+    {% endembed %}
+    {% embed 'CekurteGeneratorBundle:Action:export.html.twig' with {
+        'route': 'admin_role_export'
+    } only %}
+    {% endembed %}
+{% endblock %}
+
+{% block links_footer -%}
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}
+
+{% block content -%}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th{% if pagination.isSorted('ck.id') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Id'|trans, 'ck.id', {'title' : 'Order by'|trans ~ ' ' ~ 'Id'|trans}) }}</th>
+                    <th{% if pagination.isSorted('ck.description') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Description'|trans, 'ck.description', {'title' : 'Order by'|trans ~ ' ' ~ 'Description'|trans}) }}</th>
+                    {% if cekurte_is_granted('RETRIEVE') or cekurte_is_granted('UPDATE') or cekurte_is_granted('DELETE') %}
+                        <th class="action">{{ 'Actions'|trans }}</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in pagination %}
+                <tr>
+                    <td><a href="{{ path('admin_role_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.description }}</td>
+                    {% if cekurte_is_granted('RETRIEVE') or cekurte_is_granted('UPDATE') or cekurte_is_granted('DELETE') %}
+                        <td>
+                            {% embed 'CekurteGeneratorBundle:Action:retrieve.html.twig' with {
+                                'route'             : 'admin_role_show',
+                                'identifierKey'     : 'id',
+                                'identifierValue'   : entity.id
+                            } only %}
+                            {% endembed  %}
+                            {% embed 'CekurteGeneratorBundle:Action:update.html.twig' with {
+                                'route' : 'admin_role_edit',
+                                'identifierKey'     : 'id',
+                                'identifierValue'   : entity.id
+                            } only %}
+                            {% endembed  %}
+                            {% embed 'CekurteGeneratorBundle:Action:delete.html.twig' with {
+                                'route'             : 'admin_role_delete',
+                                'identifierKey'     : 'id',
+                                'identifierValue'   : entity.id,
+                                'form'              : delete_form,
+                            } only %}
+                            {% endembed  %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

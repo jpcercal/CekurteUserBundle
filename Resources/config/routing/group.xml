@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <import resource="@FOSUserBundle/Resources/config/routing/group.xml" />
+
+    <route id="fos_user_group_edit_roles" pattern="/{groupName}/edit/roles">
+        <default key="_controller">FOSUserBundle:Group:editRoles</default>
+    </route>
+
+    <route id="fos_user_group_edit_users" pattern="/{groupName}/edit/users">
+        <default key="_controller">FOSUserBundle:Group:editUsers</default>
+    </route>
+
+</routes>

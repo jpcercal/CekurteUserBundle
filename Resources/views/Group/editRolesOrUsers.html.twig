@@ -1,0 +1,16 @@
+{% extends 'CekurteUserBundle::layout.html.twig' %}
+
+{% set title    = 'Group'|trans %}
+{% set subtitle = 'Edit Roles'|trans %}
+
+{% block links -%}
+    <a title="" class="btn btn-default" href="{{ path('fos_user_group_show', {'groupName': group.name}) }}"><span class="glyphicon glyphicon-new-window"></span> {{ 'Details'|trans }}</a>
+{% endblock %}
+
+{%- block content -%}
+    <form class="form-horizontal" role="form" action="{{ path(routeFormSubmit, {'groupName': group.name} ) }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+        {% embed 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
+        {% endembed %}
+    </form>
+{%- endblock -%}
