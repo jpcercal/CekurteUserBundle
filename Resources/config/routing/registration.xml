@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <import resource="@FOSUserBundle/Resources/config/routing/registration.xml" />
+
+    <route id="fos_user_registration_register" path="/{type}">
+        <default key="_controller">FOSUserBundle:Registration:register</default>
+        <default key="type">registration</default>
+    </route>
+
+    <route id="fos_user_registration_register_registration" path="/{type}">
+        <default key="_controller">FOSUserBundle:Registration:register</default>
+        <default key="type">registration</default>
+    </route>
+
+</routes>
