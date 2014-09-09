@@ -64,7 +64,10 @@
                     <th>{{ 'Enabled'|trans }}</th>
                     <td>
                         {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
-                            'fieldValue': entity.enabled
+                            'route'             : 'cekurte_user_update_enabled',
+                            'identifierKey'     : 'username',
+                            'identifierValue'   : entity.username,
+                            'fieldValue'        : entity.enabled
                         } %}
                     </td>
                 </tr>
@@ -72,7 +75,10 @@
                     <th>{{ 'Locked'|trans }}</th>
                     <td>
                         {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
-                            'fieldValue': entity.locked
+                            'route'             : 'cekurte_user_update_locked',
+                            'identifierKey'     : 'username',
+                            'identifierValue'   : entity.username,
+                            'fieldValue'        : entity.locked
                         } %}
                     </td>
                 </tr>
@@ -80,7 +86,10 @@
                     <th>{{ 'Expired'|trans }}</th>
                     <td>
                         {% include 'CekurteGeneratorBundle:Action:boolean-field.html.twig' with {
-                            'fieldValue': entity.expired
+                            'route'             : 'cekurte_user_update_expired',
+                            'identifierKey'     : 'username',
+                            'identifierValue'   : entity.username,
+                            'fieldValue'        : entity.expired
                         } %}
                     </td>
                 </tr>

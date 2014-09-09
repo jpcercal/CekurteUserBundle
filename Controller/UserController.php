@@ -105,4 +105,78 @@ class UserController extends CekurteController implements RepositoryInterface
             'entity'  => $entity,
         );
     }
+
+    /**
+     * Set the boolean fields to question.
+     *
+     * @Route("/update/{username}/enabled/{action}", requirements={"action" = "\d+"}, defaults={"method" = "enabled"}, name="cekurte_user_update_enabled")
+     * @Route("/update/{username}/expired/{action}", requirements={"action" = "\d+"}, defaults={"method" = "expired"}, name="cekurte_user_update_expired")
+     * @Route("/update/{username}/locked/{action}",  requirements={"action" = "\d+"}, defaults={"method" = "locked"},  name="cekurte_user_update_locked")
+     * @Method("GET")
+     * @Template()
+     * @Secure(roles="ROLE_CEKURTEGENERATORBUNDLE, ROLE_SUPER_ADMIN")
+     *
+     * @param string $username
+     * @param string $method
+     * @param int $action
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @return RedirectResponse
+     *
+     * @author João Paulo Cercal <sistemas@cekurte.com>
+     * @version 0.1
+     */
+    public function updateBooleanFieldsAction($username, $method, $action)
+    {
+        $entity = $this->getEntityRepository()->findOneBy(array(
+            'username' => $username,
+        ));
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find User entity.');
+        }
+
+        if (!in_array($method, array('enabled', 'expired', 'locked'))) {
+            throw $this->createNotFoundException(sprintf('The method %s was not exist.', $method));
+        }
+
+        try {
+
+            switch ($method) {
+                case 'enabled':
+                    $entity->setEnabled((bool) $action);
+                    break;
+                case 'expired':
+                    $entity->setExpired((bool) $action);
+                    break;
+                case 'locked':
+                    $entity->setLocked((bool) $action);
+                    break;
+            }
+
+            $em = $this->get('doctrine')->getManager();
+
+            $em->persist($entity);
+            $em->flush();
+
+            $message = $action
+                ? sprintf('The user was %s with successfully', $method)
+                : sprintf('The user was not flagged as %s', $method)
+            ;
+
+            $this->get('session')->getFlashBag()->add('message', array(
+                'type'      => 'success',
+                'message'   => $this->get('translator')->trans($message) . '!',
+            ));
+
+        } catch (\Exception $e) {
+
+            $this->get('session')->getFlashBag()->add('message', array(
+                'type'      => 'error',
+                'message'   => $this->get('translator')->trans('One or more problems was found on set the user') . '!',
+            ));
+        }
+
+        return $this->redirect($this->generateUrl('cekurte_user_show', array('username' => $entity->getUsername())));
+    }
 }
