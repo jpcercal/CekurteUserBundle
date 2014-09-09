@@ -1,7 +1,13 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends 'CekurteUserBundle::layout.html.twig' %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+{% set title    = 'Registration'|trans %}
+{% set subtitle = 'Check your email'|trans %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
-{% endblock fos_user_content %}
+{%- block menu -%}{%- endblock -%}
+
+{%- block menu_right -%}{%- endblock -%}
+
+{%- block content -%}
+    {{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}
+    {{ dump(app.session.get('fos_user_send_confirmation_email/email')) }}
+{%- endblock -%}

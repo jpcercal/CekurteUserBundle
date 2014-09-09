@@ -78,7 +78,7 @@ class UserController extends CekurteController implements RepositoryInterface
     /**
      * Show details from user.
      *
-     * @Route("/{username}/", name="cekurte_user_show")
+     * @Route("/show/{username}/", name="cekurte_user_show")
      * @Method("GET")
      * @Template()
      * @Secure(roles="ROLE_CEKURTEGENERATORBUNDLE, ROLE_SUPER_ADMIN")

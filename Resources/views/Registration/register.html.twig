@@ -10,7 +10,7 @@
 {%- block menu_right -%}{%- endblock -%}
 
 {%- block content -%}
-    <form class="form-horizontal" role="form" action="{{ path('fos_user_registration_register_' ~ app.request.get('type')) }}" {{ form_enctype(form) }} method="POST">
+    <form class="form-horizontal" role="form" action="{{ path('fos_user_registration_register_' ~ app.request.get('type') ~ '_registration') }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}
         {% embed 'CekurteGeneratorBundle:Action:form-actions.html.twig' %}
             {% block action_submit_label %}{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}{% endblock %}

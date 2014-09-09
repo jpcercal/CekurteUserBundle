@@ -6,12 +6,22 @@
 
     <import resource="@FOSUserBundle/Resources/config/routing/registration.xml" />
 
-    <route id="fos_user_registration_register" path="/{type}">
+    <route id="fos_user_registration_register" pattern="/admin/users/new">
+        <default key="_controller">FOSUserBundle:Registration:register</default>
+        <default key="type">admin</default>
+    </route>
+
+    <route id="fos_user_registration_register_admin_registration" pattern="/admin/users/create">
+        <default key="_controller">FOSUserBundle:Registration:register</default>
+        <default key="type">admin</default>
+    </route>
+
+    <route id="fos_user_registration_register_default" pattern="/register">
         <default key="_controller">FOSUserBundle:Registration:register</default>
         <default key="type">registration</default>
     </route>
 
-    <route id="fos_user_registration_register_registration" path="/{type}">
+    <route id="fos_user_registration_register_default_registration" pattern="/register">
         <default key="_controller">FOSUserBundle:Registration:register</default>
         <default key="type">registration</default>
     </route>
