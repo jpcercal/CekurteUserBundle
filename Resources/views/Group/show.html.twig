@@ -12,6 +12,13 @@
     <a title="" class="btn btn-primary" href="{{ path('fos_user_group_edit_users', {'groupName': group.name}) }}">
         <span class="glyphicon glyphicon-user"></span> {{ 'Edit Users'|trans }}
     </a>
+    {% embed 'CekurteGeneratorBundle:Action:update.html.twig' with {
+        'route'             : 'fos_user_group_edit',
+        'identifierKey'     : 'groupName',
+        'identifierValue'   : group.name,
+        'show_label'        : true
+    } only %}
+    {% endembed  %}
     <a title="" class="btn btn-default" href="{{ path('fos_user_group_list') }}">
         <span class="glyphicon glyphicon-list"></span> {{ 'List'|trans }}
     </a>
