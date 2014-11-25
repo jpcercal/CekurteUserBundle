@@ -29,7 +29,7 @@ class GroupController extends BaseController
     {
         $group = $this->findGroupBy('name', $groupName);
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:show.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:show.html.twig', array(
             'group' => $group,
             'users' => $this->getUsersFromGroup($groupName),
         ));
@@ -104,7 +104,7 @@ class GroupController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:editRolesOrUsers.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:editRolesOrUsers.html.twig', array(
             'group'             => $group,
             'form'              => $form->createView(),
             'routeFormSubmit'   => 'fos_user_group_edit_roles',
@@ -196,7 +196,7 @@ class GroupController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:editRolesOrUsers.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Group:editRolesOrUsers.html.twig', array(
             'group'             => $group,
             'form'              => $form->createView(),
             'routeFormSubmit'   => 'fos_user_group_edit_users',
