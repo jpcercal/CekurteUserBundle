@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Cekurte\GeneratorBundle\Controller\CekurteController;
-use Cekurte\GeneratorBundle\Controller\RepositoryInterface;
 use Cekurte\GeneratorBundle\Office\PHPExcel as CekurtePHPExcel;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,21 +26,8 @@ use Cekurte\UserBundle\Form\Handler\RoleFormHandler;
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 0.1
  */
-class RoleController extends CekurteController implements RepositoryInterface
+class RoleController extends CekurteController
 {
-    /**
-     * Get a instance of RoleRepository.
-     *
-     * @return RoleRepository
-     *
-     * @author João Paulo Cercal <sistemas@cekurte.com>
-     * @version 0.1
-     */
-    public function getEntityRepository()
-    {
-        return $this->get('doctrine')->getRepository('CekurteUserBundle:Role');
-    }
-
     /**
      * Lists all Role entities.
      *
@@ -70,7 +56,7 @@ class RoleController extends CekurteController implements RepositoryInterface
             $form->bind($this->get('session')->get('search_role'));
         }
 
-        $query = $this->getEntityRepository()->getQuery($form->getData(), $sort, $direction);
+        $query = $this->getEntityRepository('CekurteUserBundle:Role')->getQuery($form->getData(), $sort, $direction);
 
         $pagination = $this->getPagination($query, $page);
 
@@ -134,7 +120,7 @@ class RoleController extends CekurteController implements RepositoryInterface
             $form->bind($this->get('session')->get('search_role'));
         }
 
-        $query = $this->getEntityRepository()->getQuery($form->getData(), $sort, $direction);
+        $query = $this->getEntityRepository('CekurteUserBundle:Role')->getQuery($form->getData(), $sort, $direction);
 
         $translator = $this->get('translator');
 
@@ -228,7 +214,7 @@ class RoleController extends CekurteController implements RepositoryInterface
      */
     public function showAction($id)
     {
-        $entity = $this->getEntityRepository()->find($id);
+        $entity = $this->getEntityRepository('CekurteUserBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -258,7 +244,7 @@ class RoleController extends CekurteController implements RepositoryInterface
      */
     public function editAction($id)
     {
-        $entity = $this->getEntityRepository()->find($id);
+        $entity = $this->getEntityRepository('CekurteUserBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');
@@ -289,7 +275,7 @@ class RoleController extends CekurteController implements RepositoryInterface
      */
     public function updateAction(Request $request, $id)
     {
-        $entity = $this->getEntityRepository()->find($id);
+        $entity = $this->getEntityRepository('CekurteUserBundle:Role')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Role entity.');

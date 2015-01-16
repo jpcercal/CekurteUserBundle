@@ -3,7 +3,6 @@
 namespace Cekurte\UserBundle\Controller;
 
 use Cekurte\GeneratorBundle\Controller\CekurteController;
-use Cekurte\GeneratorBundle\Controller\RepositoryInterface;
 use FOS\UserBundle\Model\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,21 +17,8 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
  * @author João Paulo Cercal <sistemas@cekurte.com>
  * @version 1.0
  */
-class UserController extends CekurteController implements RepositoryInterface
+class UserController extends CekurteController
 {
-    /**
-     * Get a instance of PostRepository.
-     *
-     * @return User
-     *
-     * @author João Paulo Cercal <sistemas@cekurte.com>
-     * @version 0.1
-     */
-    public function getEntityRepository()
-    {
-        return $this->getDoctrine()->getRepository($this->getUserClass());
-    }
-
     /**
      * Get a instance of entity User
      *
@@ -61,11 +47,11 @@ class UserController extends CekurteController implements RepositoryInterface
      */
     public function indexAction()
     {
-        $enabledUsers = $this->getEntityRepository()->findBy(array(
+        $enabledUsers = $this->getEntityRepository($this->getUserClass())->findBy(array(
             'enabled' => true,
         ));
 
-        $disabledUsers = $this->getEntityRepository()->findBy(array(
+        $disabledUsers = $this->getEntityRepository($this->getUserClass())->findBy(array(
             'enabled' => false,
         ));
 
@@ -93,7 +79,7 @@ class UserController extends CekurteController implements RepositoryInterface
      */
     public function showAction($username)
     {
-        $entity = $this->getEntityRepository()->findOneBy(array(
+        $entity = $this->getEntityRepository($this->getUserClass())->findOneBy(array(
             'username' => $username,
         ));
 
@@ -128,7 +114,7 @@ class UserController extends CekurteController implements RepositoryInterface
      */
     public function updateBooleanFieldsAction($username, $method, $action)
     {
-        $entity = $this->getEntityRepository()->findOneBy(array(
+        $entity = $this->getEntityRepository($this->getUserClass())->findOneBy(array(
             'username' => $username,
         ));
 
